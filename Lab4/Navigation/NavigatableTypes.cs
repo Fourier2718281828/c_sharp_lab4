@@ -2,7 +2,7 @@
 {
     enum MainNavigationTypes
     {
-        Auth,
+        AddPerson,
         Result
     }
 }

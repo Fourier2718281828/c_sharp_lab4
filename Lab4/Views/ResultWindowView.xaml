@@ -21,6 +21,7 @@
 
         <Button
             Grid.Column="0" Grid.Row="0"
+            Command="{Binding ToAddPersonCommand}"
             Margin="20 40 20 40"
             Content="Add"
             Foreground="DarkBlue"

@@ -20,10 +20,10 @@ namespace Lab2.ViewModels
         {
             switch (type)
             {
-                case MainNavigationTypes.Auth:
-                    return new AuthWindowViewModel(() => Navigate(MainNavigationTypes.Result), ref _person);
+                case MainNavigationTypes.AddPerson:
+                    return new AddPersonWindowViewModel(() => Navigate(MainNavigationTypes.Result), ref _person);
                 case MainNavigationTypes.Result:
-                    return new ResultWindowViewModel(() => Navigate(MainNavigationTypes.Auth), ref _person);
+                    return new ResultWindowViewModel(() => Navigate(MainNavigationTypes.AddPerson), ref _person);
                 default:
                     return null;
             }

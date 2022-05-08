@@ -16,8 +16,8 @@
         <DataTemplate DataType="{ x:Type viewModels:ResultWindowViewModel}">
             <views:ResultWindowView></views:ResultWindowView>
         </DataTemplate>
-        <DataTemplate DataType="{ x:Type viewModels:AuthWindowViewModel}">
-            <views:AuthWindowView></views:AuthWindowView>
+        <DataTemplate DataType="{ x:Type viewModels:AddPersonWindowViewModel}">
+            <views:AddPersonWindowView></views:AddPersonWindowView>
         </DataTemplate>
     </Window.Resources>
 </Window>

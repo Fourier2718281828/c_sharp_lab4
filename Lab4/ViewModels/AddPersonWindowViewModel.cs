@@ -8,17 +8,17 @@ using Lab3.Exceptions;
 
 namespace Lab2.ViewModels
 {
-    internal class AuthWindowViewModel : INavigatable<MainNavigationTypes>
+    internal class AddPersonWindowViewModel : INavigatable<MainNavigationTypes>
     {
         #region Fields
         private Person _person;
-        private RelayCommand<object> _exitCommand;
+        private RelayCommand<object> _backCommand;
         private RelayCommand<object> _proceedCommand;
         private readonly Action _exitNavigation;
         #endregion
 
         #region Constructors
-        public AuthWindowViewModel (Action exitNavigation, ref Person person)
+        public AddPersonWindowViewModel (Action exitNavigation, ref Person person)
         {
             _exitNavigation = exitNavigation;
             _person = person; 
@@ -55,12 +55,12 @@ namespace Lab2.ViewModels
         {
             get => _proceedCommand ??= new RelayCommand<object>(_ => proceed(), _ => allFieldsFilled());
         }
-        public RelayCommand<object> ExitCommand
+        public RelayCommand<object> BackCommand
         {
-            get => _exitCommand ??= new RelayCommand<object>(_ => Environment.Exit(0));
+            get => _backCommand ??= new RelayCommand<object>(_ => _exitNavigation.Invoke());
         }
 
-        public MainNavigationTypes ViewType => MainNavigationTypes.Auth;
+        public MainNavigationTypes ViewType => MainNavigationTypes.AddPerson;
 
         #endregion
 

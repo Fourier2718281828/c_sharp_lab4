@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Lab2.Views.AuthWindowView"
+﻿<UserControl x:Class="Lab2.Views.AddPersonWindowView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -90,11 +90,11 @@
 
         <Button
             Grid.Row="7" Grid.Column="0" 
-            Command="{Binding ExitCommand}"
+            Command="{Binding BackCommand}"
             Height="20" Width="90"
             Margin="5 5 5 10"
             VerticalAlignment="Bottom"
-            Content="Exit"
+            Content="Back"
             Foreground="DarkBlue"
             Background="CornflowerBlue"
             FontSize="12"

@@ -19,9 +19,9 @@ namespace Lab2.Views
     /// <summary>
     /// Interaction logic for AuthWindowView.xaml
     /// </summary>
-    public partial class AuthWindowView : UserControl
+    public partial class AddPersonWindowView : UserControl
     {
-        public AuthWindowView()
+        public AddPersonWindowView()
         {
             InitializeComponent();
         }

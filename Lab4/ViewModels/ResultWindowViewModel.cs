@@ -15,6 +15,8 @@ namespace Lab2.ViewModels
         private readonly Person _person;
         private readonly Action _exitNavigation;
         private RelayCommand<object> _exitCommand;
+        private RelayCommand<object> _toAddPersonCommand;
+
         #endregion
 
         #region Constructors
@@ -27,48 +29,14 @@ namespace Lab2.ViewModels
         #endregion
 
         #region Properties
-        public string Name
-        {
-            get => _person.Name;
-        }
-
-        public string Surname
-        {
-            get => _person.Surname;
-        }
-
-        public string Email
-        {
-            get => _person.Email;
-        }
-
-        public string DateOfBirth
-        {
-            get => _person.DateOfBirth.Value.ToShortDateString();
-        }
-
-        public string IsAdult
-        {
-            get => _person.IsAdult ? "yes" : "no";
-        }
-
-        public string SunSign
-        {
-            get => _person.SunSign.ToString();
-        }
-
-        public string ChineseSign
-        { 
-            get => _person.ChineseSign.ToString();
-        }
-
-        public string HasBirthday
-        {
-            get => _person.IsBirthday ? "Happy Birthday!" :"No";
-        }
         public RelayCommand<object> ExitCommand
         {
             get => _exitCommand ??= new RelayCommand<object>(_ => Environment.Exit(0));
+        }
+
+        public RelayCommand<object> ToAddPersonCommand
+        {
+            get => _toAddPersonCommand ??= new RelayCommand<object>(_ => _exitNavigation.Invoke());
         }
 
         public MainNavigationTypes ViewType => MainNavigationTypes.Result;
