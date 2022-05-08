@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="Lab2.Views.ResultWindowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Lab2.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Button
+            Grid.Column="0" Grid.Row="0"
+            Margin="20 40 20 40"
+            Content="Add"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="18"
+            FontWeight="Bold">
+        </Button>
+        <Button
+            Grid.Column="0" Grid.Row="1"
+            Margin="20 40 20 40"
+            Content="Erase"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="18"
+            FontWeight="Bold">
+        </Button>
+        <Button
+            Grid.Column="0" Grid.Row="2"
+            Margin="20 40 20 40"
+            Content="Edit"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="18"
+            FontWeight="Bold">
+        </Button>
+        <Button
+            Grid.Column="0" Grid.Row="3"
+            Margin="20 40 20 40"
+            Content="Exit"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="18"
+            FontWeight="Bold">
+        </Button>
+
+        <DataGrid
+            Grid.Column="1" Grid.Row="0"
+            Grid.RowSpan="4"
+            IsReadOnly="True"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Header="Name"
+                    Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Surame"
+                    Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Email"
+                    Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Date of Birth"
+                    Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="IsAdult"
+                    Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Sun Sign"
+                    Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Chinese Sign"
+                    Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Has Birthday"
+                    Width="*">
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
