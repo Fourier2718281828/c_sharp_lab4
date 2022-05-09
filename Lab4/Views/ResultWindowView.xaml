@@ -31,6 +31,7 @@
         </Button>
         <Button
             Grid.Column="0" Grid.Row="1"
+            Command="{Binding EraseCommand}"
             Margin="20 40 20 40"
             Content="Erase"
             Foreground="DarkBlue"
@@ -40,6 +41,7 @@
         </Button>
         <Button
             Grid.Column="0" Grid.Row="2"
+            Command="{Binding ToEditPersonCommand}"
             Margin="20 40 20 40"
             Content="Edit"
             Foreground="DarkBlue"
@@ -62,39 +64,58 @@
             Grid.Column="1" Grid.Row="0"
             Grid.RowSpan="4"
             IsReadOnly="True"
+            ItemsSource="{Binding CollectionOfPeople}"
+            SelectedItem="{Binding ChosenPerson}"
+            AutoGenerateColumns="False"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Header="Name"
-                    Width="*">
+                    Width="*"
+                    Binding="{Binding Name}"
+                    >
                 </DataGridTextColumn>
                 <DataGridTextColumn
-                    Header="Surame"
-                    Width="*">
+                    Header="Surname"
+                    Width="*"
+                    Binding="{Binding Surname}"
+                    >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Email"
-                    Width="*">
+                    Width="2*"
+                    Binding="{Binding Email}"
+                    >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Date of Birth"
-                    Width="*">
+                    Width="0.7*"
+                    Binding="{Binding DateOfBirthString}"
+                    >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="IsAdult"
-                    Width="*">
+                    Width="0.5*"
+                    Binding="{Binding IsAdult}"
+                    >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Sun Sign"
-                    Width="*">
+                    Width="0.5*"
+                    Binding="{Binding SunSign}"
+                    >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Chinese Sign"
-                    Width="*">
+                    Width="0.7*"
+                    Binding="{Binding ChineseSign}"
+                    >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Has Birthday"
-                    Width="*">
+                    Width="0.7*"
+                    Binding="{Binding IsBirthday}"
+                    >
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>

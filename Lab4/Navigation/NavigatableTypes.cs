@@ -3,6 +3,7 @@
     enum MainNavigationTypes
     {
         AddPerson,
-        Result
+        Result,
+        Edit,
     }
 }

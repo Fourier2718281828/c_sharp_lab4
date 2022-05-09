@@ -19,5 +19,8 @@
         <DataTemplate DataType="{ x:Type viewModels:AddPersonWindowViewModel}">
             <views:AddPersonWindowView></views:AddPersonWindowView>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:EditPersonWindowViewModel}">
+            <views:EditPersonWindowView></views:EditPersonWindowView>
+        </DataTemplate>
     </Window.Resources>
 </Window>

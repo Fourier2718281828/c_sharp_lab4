@@ -6,27 +6,35 @@ using System.Threading.Tasks;
 using System.Windows;
 using Lab3.Exceptions;
 using Lab4.Repositories;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 
 namespace Lab2.ViewModels
 {
-    internal class AddPersonWindowViewModel : INavigatable<MainNavigationTypes>
+    internal class EditPersonWindowViewModel : INavigatable<MainNavigationTypes>
     {
         #region Fields
         private FileRepositoryOfPeople _repo;
         private ObservableCollection<Person> _collectionOfPeople;
         private RelayCommand<object> _backCommand;
-        private RelayCommand<object> _addCommand;
+        private RelayCommand<object> _editCommand;
         private readonly Action _exitNavigation;
+        private Person _chosenPerson;
         #endregion
 
         #region Constructors
-        public AddPersonWindowViewModel (Action exitNavigation, ref FileRepositoryOfPeople repo, ref ObservableCollection<Person> col)
+        public EditPersonWindowViewModel
+            (
+            Action exitNavigation, 
+            ref FileRepositoryOfPeople repo,
+            ref ObservableCollection<Person> col,
+            ref Person chosenPerson
+            )
         {
-            _exitNavigation = exitNavigation;
             _repo = repo;
             _collectionOfPeople = col;
+            _exitNavigation = exitNavigation;
+            _chosenPerson = chosenPerson;
             return;
         }
         #endregion
@@ -34,54 +42,65 @@ namespace Lab2.ViewModels
         #region Properties
         public string Name
         {
-            get; set;
+            get => _chosenPerson.Name;
+            set => _chosenPerson.Name = value;
+            
         }
 
         public string Surname
         {
-            get; set;
+            get => _chosenPerson.Surname;
+            set => _chosenPerson.Surname = value;
         }
 
         public string Email
         {
-            get; set;
+            get => _chosenPerson.Email;
+            set => _chosenPerson.Email = value;
         }
 
         public DateTime? DateOfBirth
         {
-            get; set;
+            get
+            {
+                return _chosenPerson.DateOfBirth;
+            }
+            set
+            {
+                _chosenPerson.DateOfBirth = value;
+            }
         }
 
-        public RelayCommand<object> AddCommand
+        public RelayCommand<object> EditCommand
         {
-            get => _addCommand ??= new RelayCommand<object>(_ => add(), _ => allFieldsFilled());
+            get => _editCommand ??= new RelayCommand<object>(_ => edit(), _ => allFieldsFilled());
         }
         public RelayCommand<object> BackCommand
         {
             get => _backCommand ??= new RelayCommand<object>(_ => back());
         }
 
-        public MainNavigationTypes ViewType => MainNavigationTypes.AddPerson;
+        public MainNavigationTypes ViewType => MainNavigationTypes.Edit;
 
         #endregion
 
         #region Methods
         private void back()
         {
-            Name = Surname = Email =  null;
+            Name = Surname = Email = null;
             DateOfBirth = null;
             _exitNavigation.Invoke();
         }
 
         private bool allFieldsFilled()
         {
-            return (!String.IsNullOrEmpty(Name)      &&
-                    !String.IsNullOrEmpty(Surname)   &&
-                    !String.IsNullOrEmpty(Email)     &&
+            return (!String.IsNullOrEmpty(Name) &&
+                    !String.IsNullOrEmpty(Surname) &&
+                    !String.IsNullOrEmpty(Email) &&
                     DateOfBirth != null);
         }
 
-        private async void add()
+        private async void edit()
         {
             Person person = new Person(Name, Surname, Email, DateOfBirth);
             try
@@ -101,11 +120,12 @@ namespace Lab2.ViewModels
                 await task5;
 
                 person.checkTheAge();
-               
+
                 Task task6 = Task.Run(() => _repo.AddOrUpdateAsync(person));
                 await task6;
 
-                _collectionOfPeople.Add(person);
+                //_collectionOfPeople.Add(person);
+                
 
                 Name = Surname = Email = null;
                 DateOfBirth = null;
@@ -126,6 +146,7 @@ namespace Lab2.ViewModels
             }
 
         }
+
         #endregion
     }
 }

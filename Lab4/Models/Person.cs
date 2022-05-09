@@ -95,8 +95,11 @@ namespace Lab2.Models
         {
             get => _dateOfBirth;
             set => _dateOfBirth = value;
-                
-            
+        }
+
+        public String? DateOfBirthString
+        {
+            get => _dateOfBirth.Value.ToShortDateString();
         }
         #endregion
 
