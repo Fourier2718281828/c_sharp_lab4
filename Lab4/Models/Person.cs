@@ -112,6 +112,11 @@ namespace Lab2.Models
         #endregion
 
         #region Methods
+
+        public bool Equals(Person p)
+        {
+            return Name == p.Name && Surname == p.Surname && Email == p.Email && DateOfBirth == p.DateOfBirth;
+        }
         public void computeIsAdult()
         {
             _isAdult = _age >= ADULT_AGE;

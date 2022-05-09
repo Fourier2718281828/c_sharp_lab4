@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using Lab4.Repositories;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Runtime.CompilerServices;
 
 namespace Lab2.ViewModels
 {
-    internal class ResultWindowViewModel : INavigatable<MainNavigationTypes>
+    internal class ResultWindowViewModel : INavigatable<MainNavigationTypes>, INotifyPropertyChanged
     {
         #region Fields
         private FileRepositoryOfPeople _repo;
@@ -26,6 +26,9 @@ namespace Lab2.ViewModels
         private RelayCommand<object> _erasePersonCommand;
         private RelayCommand<object> _exitCommand;
         private Person _chosenPerson;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         #endregion
 
         #region Constructors
@@ -43,6 +46,7 @@ namespace Lab2.ViewModels
             _repo = repo;
             _collectionOfPeople = col;
             _chosenPerson = chosen;
+
             return;
         }
         #endregion
@@ -51,6 +55,11 @@ namespace Lab2.ViewModels
         public ObservableCollection<Person> CollectionOfPeople
         {
             get => _collectionOfPeople;
+            set
+            {
+                _collectionOfPeople = value;
+                //OnPropertyChanged(nameof(CollectionOfPeople));
+            }
         }
 
         public Person ChosenPerson
@@ -58,10 +67,10 @@ namespace Lab2.ViewModels
             get => _chosenPerson; 
             set
             {
-                _chosenPerson.Name = value.Name;
-                _chosenPerson.Surname = value.Surname;
-                _chosenPerson.DateOfBirth = value.DateOfBirth;
-                _chosenPerson.Email = value.Email;
+                _chosenPerson.Name = value?.Name;
+                _chosenPerson.Surname = value?.Surname;
+                _chosenPerson.DateOfBirth = value?.DateOfBirth;
+                _chosenPerson.Email = value?.Email;
             }
         }
         public RelayCommand<object> ExitCommand
@@ -101,8 +110,26 @@ namespace Lab2.ViewModels
             else
             {
                 await _repo.Erase(ChosenPerson);
-                _collectionOfPeople.Remove(ChosenPerson);
+                _collectionOfPeople.Remove(find(ChosenPerson));
             }
+        }
+
+        private Person find(Person p)
+        {
+            for (int i = 0; i < _collectionOfPeople.Count; ++i)
+            {
+                if (_collectionOfPeople[i].Equals(p))
+                    return _collectionOfPeople[i];
+            }
+
+            return p;
+        }
+
+        
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

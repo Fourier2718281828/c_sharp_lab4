@@ -64,7 +64,7 @@
             Grid.Column="1" Grid.Row="0"
             Grid.RowSpan="4"
             IsReadOnly="True"
-            ItemsSource="{Binding CollectionOfPeople}"
+            ItemsSource="{Binding CollectionOfPeople,Mode=OneWay}"
             SelectedItem="{Binding ChosenPerson}"
             AutoGenerateColumns="False"
             >

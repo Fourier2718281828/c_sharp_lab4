@@ -20,6 +20,8 @@ namespace Lab2.ViewModels
         private RelayCommand<object> _editCommand;
         private readonly Action _exitNavigation;
         private Person _chosenPerson;
+        private Person _newPerson = new();
+
         #endregion
 
         #region Constructors
@@ -35,6 +37,10 @@ namespace Lab2.ViewModels
             _collectionOfPeople = col;
             _exitNavigation = exitNavigation;
             _chosenPerson = chosenPerson;
+
+            /*_collectionOfPeople.Remove(_chosenPerson);*/
+
+            
             return;
         }
         #endregion
@@ -42,34 +48,68 @@ namespace Lab2.ViewModels
         #region Properties
         public string Name
         {
-            get => _chosenPerson.Name;
-            set => _chosenPerson.Name = value;
-            
+            get => _newPerson.Name ??= _chosenPerson.Name; 
+            set
+            {
+                _newPerson.Name = value;
+            }
         }
 
         public string Surname
         {
-            get => _chosenPerson.Surname;
-            set => _chosenPerson.Surname = value;
+            get => _newPerson.Surname ??= _chosenPerson.Surname;
+            set
+            {
+                _newPerson.Surname = value;
+            }
         }
 
         public string Email
         {
-            get => _chosenPerson.Email;
-            set => _chosenPerson.Email = value;
+            get => _newPerson.Email ??= _chosenPerson.Email;
+            set
+            {
+                _newPerson.Email = value;
+            }
         }
 
         public DateTime? DateOfBirth
         {
-            get
-            {
-                return _chosenPerson.DateOfBirth;
-            }
+            get => _newPerson.DateOfBirth ??= _chosenPerson.DateOfBirth;
             set
             {
-                _chosenPerson.DateOfBirth = value;
+                _newPerson.DateOfBirth = value;
             }
         }
+        //public string Name
+        //{
+        //    get => _chosenPerson.Name;
+        //    set => _chosenPerson.Name = value;
+        //}
+
+        //public string Surname
+        //{
+        //    get => _chosenPerson.Surname;
+        //    set => _chosenPerson.Surname = value;
+        //}
+
+        //public string Email
+        //{
+        //    get => _chosenPerson.Email;
+        //    set => _chosenPerson.Email = value;
+        //}
+
+        //public DateTime? DateOfBirth
+        //{
+        //    get
+        //    {
+        //        return _chosenPerson.DateOfBirth;
+        //    }
+        //    set
+        //    {
+        //        _chosenPerson.DateOfBirth = value;
+        //    }
+        //}
 
         public RelayCommand<object> EditCommand
         {
@@ -124,11 +164,10 @@ namespace Lab2.ViewModels
                 Task task6 = Task.Run(() => _repo.AddOrUpdateAsync(person));
                 await task6;
 
-                //_collectionOfPeople.Add(person);
-                
+                await eraseChosen();
+                _collectionOfPeople.Add(person);
 
-                Name = Surname = Email = null;
-                DateOfBirth = null;
+                _newPerson = new();
 
                 _exitNavigation.Invoke();
             }
@@ -145,6 +184,26 @@ namespace Lab2.ViewModels
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+
+        private async Task eraseChosen()
+        {
+            Task<Person?> task = Task.Run(() => find(_chosenPerson));
+            await task;
+            if (task.Result == null) return;
+            _collectionOfPeople.Remove((Person) task.Result);
+        }
+
+        private Person? find(Person p)
+        {
+            for(int i = 0; i < _collectionOfPeople.Count; ++i)
+            {
+                if(_collectionOfPeople[i].Equals(p))
+                    return _collectionOfPeople[i]; 
+            }
+
+            return null;
         }
 
         #endregion
