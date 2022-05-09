@@ -49,6 +49,7 @@
         </Button>
         <Button
             Grid.Column="0" Grid.Row="3"
+            Command="{Binding ExitCommand}"
             Margin="20 40 20 40"
             Content="Exit"
             Foreground="DarkBlue"

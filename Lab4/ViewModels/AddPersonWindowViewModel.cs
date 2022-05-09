@@ -13,7 +13,7 @@ namespace Lab2.ViewModels
         #region Fields
         private Person _person;
         private RelayCommand<object> _backCommand;
-        private RelayCommand<object> _proceedCommand;
+        private RelayCommand<object> _addCommand;
         private readonly Action _exitNavigation;
         #endregion
 
@@ -51,13 +51,13 @@ namespace Lab2.ViewModels
             set => _person.DateOfBirth = value;
         }
 
-        public RelayCommand<object> ProceedCommand
+        public RelayCommand<object> AddCommand
         {
-            get => _proceedCommand ??= new RelayCommand<object>(_ => proceed(), _ => allFieldsFilled());
+            get => _addCommand ??= new RelayCommand<object>(_ => add(), _ => allFieldsFilled());
         }
         public RelayCommand<object> BackCommand
         {
-            get => _backCommand ??= new RelayCommand<object>(_ => _exitNavigation.Invoke());
+            get => _backCommand ??= new RelayCommand<object>(_ => back());
         }
 
         public MainNavigationTypes ViewType => MainNavigationTypes.AddPerson;
@@ -65,6 +65,13 @@ namespace Lab2.ViewModels
         #endregion
 
         #region Methods
+        private void back()
+        {
+            Name = Surname = Email =  null;
+            DateOfBirth = null;
+            _exitNavigation.Invoke();
+        }
+
         private bool allFieldsFilled()
         {
             return (!String.IsNullOrEmpty(Name)      &&
@@ -73,20 +80,25 @@ namespace Lab2.ViewModels
                     DateOfBirth != null);
         }
 
-        private async void proceed()
+        private async void add()
         {
             try 
             {
                 _person.checkTheEmail();
 
-                await Task.Run(() => _person.computeAge());
-                await Task.Run(() => _person.computeIsAdult());
-                await Task.Run(() => _person.computeSunSign());
-                await Task.Run(() => _person.computeChineseZodiacSign());
-                await Task.Run(() => _person.computeHasBirthday());
+                Task task1 = Task.Run(() => _person.computeAge());
+                Task task2 = Task.Run(() => _person.computeIsAdult());
+                Task task3 = Task.Run(() => _person.computeSunSign());
+                Task task4 = Task.Run(() => _person.computeChineseZodiacSign());
+                Task task5 = Task.Run(() => _person.computeHasBirthday());
+
+                await task1;
+                await task2;
+                await task3;
+                await task4;
+                await task5;
 
                 _person.checkTheAge();
-                _exitNavigation.Invoke();
             }
             catch(BadEmailException ex)
             {
@@ -101,6 +113,9 @@ namespace Lab2.ViewModels
                 MessageBox.Show(ex.Message);
             }
 
+            Name = Surname = Email = null;
+            DateOfBirth = null;
+            _exitNavigation.Invoke();
             return;
         }
         #endregion

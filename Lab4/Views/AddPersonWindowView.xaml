@@ -5,66 +5,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Lab2.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="240" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="1000">
     <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock 
+        <Grid Grid.Column="1" Grid.Row="1" Background="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock 
             Grid.Row="0" Grid.Column="0"
             Text="Name:"
             HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             FontSize="10"
             Foreground="SlateGray"
             Margin="5 5 5 0">
-        </TextBlock>
-        <TextBox   
+            </TextBlock>
+            <TextBox   
             Grid.Row="1" Grid.Column="0" 
             Text="{Binding Name, Mode=TwoWay,
             UpdateSourceTrigger=PropertyChanged}"
             Margin="5 2 5 5">
-        </TextBox>
-        
-        <TextBlock 
+            </TextBox>
+
+            <TextBlock 
             Grid.Row="2" Grid.Column="0"
             Text="Surname:"
             HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             FontSize="10"
             Foreground="SlateGray"
             Margin="5 5 5 0">
-        </TextBlock>
-        <TextBox   
+            </TextBlock>
+            <TextBox   
             Grid.Row="3" Grid.Column="0"  
             Text="{Binding Surname, Mode=TwoWay,
             UpdateSourceTrigger=PropertyChanged}"
             Margin="5 2 5 5">
-        </TextBox>
+            </TextBox>
 
-        <TextBlock 
+            <TextBlock 
             Grid.Row="4" Grid.Column="0"
             Text="Email Address:"
             HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
             FontSize="10"
             Foreground="SlateGray"
             Margin="5 5 5 0">
-        </TextBlock>
-        <TextBox   
+            </TextBlock>
+            <TextBox   
             Grid.Row="5" Grid.Column="0"  
             Text="{Binding Email, Mode=TwoWay,
             UpdateSourceTrigger=PropertyChanged}"
             Margin="5 2 5 5">
-        </TextBox>
+            </TextBox>
 
-        <DatePicker 
+            <DatePicker 
             Grid.Row="6" Grid.Column="0" 
-            
             SelectedDate="{Binding DateOfBirth, Mode=TwoWay,
             UpdateSourceTrigger=PropertyChanged}"
             HorizontalAlignment="Stretch" 
@@ -72,23 +85,23 @@
             FontSize="10"
             Foreground="SlateGray"
             Margin="5, 5, 5, 10">
-        </DatePicker>
+            </DatePicker>
 
-        <Button
+            <Button
             Grid.Row="7" Grid.Column="0" 
-            Command="{Binding ProceedCommand}"
-            Height="20" Width="170"
+            Command="{Binding AddCommand}"
+            Height="30" Width="250"
             Margin="5 5 5 10"
             VerticalAlignment="Top"
-            Content="Proceed"
+            Content="Add"
             Foreground="DarkBlue"
             Background="CornflowerBlue"
             FontSize="12"
             FontWeight="Bold"
             >
-        </Button>
+            </Button>
 
-        <Button
+            <Button
             Grid.Row="7" Grid.Column="0" 
             Command="{Binding BackCommand}"
             Height="20" Width="90"
@@ -100,6 +113,7 @@
             FontSize="12"
             FontWeight="Bold"
             >
-        </Button>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>
