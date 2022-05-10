@@ -169,7 +169,7 @@ namespace Lab2.ViewModels
         {
             for(int i = 0; i < _collectionOfPeople.Count; ++i)
             {
-                if(_collectionOfPeople[i].Equals(p))
+                if(_collectionOfPeople[i].equals(p))
                     return _collectionOfPeople[i]; 
             }
 

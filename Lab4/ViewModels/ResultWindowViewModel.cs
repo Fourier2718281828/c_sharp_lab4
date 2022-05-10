@@ -25,6 +25,16 @@ namespace Lab2.ViewModels
         private RelayCommand<object> _toEditPersonCommand;
         private RelayCommand<object> _erasePersonCommand;
         private RelayCommand<object> _exitCommand;
+        private RelayCommand<object> _sortNames;
+        private RelayCommand<object> _sortSurnames;
+        private RelayCommand<object> _sortEmails;
+        private RelayCommand<object> _sortDates;
+        private RelayCommand<object> _sortIsAdult;
+        private RelayCommand<object> _sortSunSigns;
+        private RelayCommand<object> _sortChinese;
+        private RelayCommand<object> _sortBirthday;
+        private RelayCommand<object> _deleteAll;
+
         private Person _chosenPerson;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -58,7 +68,7 @@ namespace Lab2.ViewModels
             set
             {
                 _collectionOfPeople = value;
-                //OnPropertyChanged(nameof(CollectionOfPeople));
+                OnPropertyChanged(nameof(CollectionOfPeople));
             }
         }
 
@@ -72,6 +82,11 @@ namespace Lab2.ViewModels
                 _chosenPerson.DateOfBirth = value?.DateOfBirth;
                 _chosenPerson.Email = value?.Email;
             }
+        }
+
+        public RelayCommand<object> DeleteAllCommand
+        {
+            get => _deleteAll ??= new RelayCommand<object>(_ => deleteAll());
         }
         public RelayCommand<object> ExitCommand
         {
@@ -93,10 +108,59 @@ namespace Lab2.ViewModels
             get => _toEditPersonCommand ??= new RelayCommand<object>(_ => edit());
         }
 
+        public RelayCommand<object> SortNamesCommand
+        {
+            get => _sortNames ??= new RelayCommand<object>(_ => sortByNames());
+        }
+
+        public RelayCommand<object> SortSurnamesCommand
+        {
+            get => _sortSurnames ??= new RelayCommand<object>(_ => sortBySurnames());
+        }
+
+        public RelayCommand<object> SortEmailsCommand
+        {
+            get => _sortEmails ??= new RelayCommand<object>(_ => sortByEmails());
+        }
+
+        public RelayCommand<object> SortDateCommand
+        {
+            get => _sortDates ??= new RelayCommand<object>(_ => sortByDates());
+        }
+
+        public RelayCommand<object> SortIsAdultCommand
+        {
+            get => _sortIsAdult ??= new RelayCommand<object>(_ => sortByIsAdult());
+        }
+
+        public RelayCommand<object> SortSunSignsCommand
+        {
+            get => _sortSurnames ??= new RelayCommand<object>(_ => sortBySunSign());
+        }
+
+        public RelayCommand<object> SortChineseCommand
+        {
+            get => _sortNames ??= new RelayCommand<object>(_ => sortByChinese());
+        }
+
+        public RelayCommand<object> SortBirthdaysCommand
+        {
+            get => _sortNames ??= new RelayCommand<object>(_ => sortByBirthday());
+        }
+
         public MainNavigationTypes ViewType => MainNavigationTypes.Result;
         #endregion
 
         #region Methods
+        private void deleteAll()
+        {
+            foreach(Person p in _collectionOfPeople)
+            {
+                _repo.Erase(p);
+            }
+            _collectionOfPeople.Clear();
+            return;
+        }
         private void add()
         {
             ChosenPerson = new();
@@ -137,16 +201,58 @@ namespace Lab2.ViewModels
         {
             for (int i = 0; i < _collectionOfPeople.Count; ++i)
             {
-                if (_collectionOfPeople[i].Equals(p))
+                if (_collectionOfPeople[i].equals(p))
                     return _collectionOfPeople[i];
             }
 
             return p;
         }
 
-        private void SortByEmails()
+        private void sortByNames()
         {
-            _collectionOfPeople = new ObservableCollection<Person>(_collectionOfPeople.OrderBy(person => person.Email).ToList());
+            _collectionOfPeople = new ObservableCollection<Person>(_collectionOfPeople.OrderBy(person => person.Name).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
+
+        private void sortBySurnames()
+        {
+            _collectionOfPeople = new(_collectionOfPeople.OrderBy(person => person.Surname).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
+
+        private void sortByEmails()
+        {
+            _collectionOfPeople = new(_collectionOfPeople.OrderBy(person => person.Email).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
+
+        private void sortByDates()
+        {
+            _collectionOfPeople = new(_collectionOfPeople.OrderBy(person => person.DateOfBirth).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
+
+        private void sortByIsAdult()
+        {
+            _collectionOfPeople = new(_collectionOfPeople.OrderBy(person => person.IsAdult).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
+
+        private void sortBySunSign()
+        {
+            _collectionOfPeople = new(_collectionOfPeople.OrderBy(person => person.SunSign).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
+
+        private void sortByChinese()
+        {
+            _collectionOfPeople = new(_collectionOfPeople.OrderBy(person => person.ChineseSign).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
+
+        private void sortByBirthday()
+        {
+            _collectionOfPeople = new(_collectionOfPeople.OrderBy(person => person.IsBirthday).ToList());
             OnPropertyChanged(nameof(CollectionOfPeople));
         }
 

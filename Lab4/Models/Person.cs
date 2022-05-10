@@ -113,7 +113,7 @@ namespace Lab2.Models
 
         #region Methods
 
-        public bool Equals(Person p)
+        public bool equals(Person p)
         {
             return Name == p.Name && Surname == p.Surname && Email == p.Email && DateOfBirth == p.DateOfBirth;
         }

@@ -12,12 +12,24 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+
         </Grid.ColumnDefinitions>
+        
+        
 
         <Button
             Grid.Column="0" Grid.Row="0"
@@ -63,6 +75,7 @@
         <DataGrid
             Grid.Column="1" Grid.Row="0"
             Grid.RowSpan="4"
+            Grid.ColumnSpan="8"
             IsReadOnly="True"
             ItemsSource="{Binding CollectionOfPeople,Mode=OneWay}"
             SelectedItem="{Binding ChosenPerson}"
@@ -127,5 +140,105 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+
+        <Button
+            Grid.Column="0" Grid.Row="4"
+            Command="{Binding DeleteAllCommand}"
+            Margin="20 20 20 20"
+            Content="DELETEALL"
+            Foreground="DarkBlue"
+            Background="RED"
+            FontSize="13"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="1" Grid.Row="4"
+            Command="{Binding SortNamesCommand}"
+            Margin="20 20 20 20"
+            Content="Name"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="16"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="2" Grid.Row="4"
+            Command="{Binding SortSurnamesCommand}"
+            Margin="20 20 20 20"
+            Content="Surname"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="16"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="3" Grid.Row="4"
+            Command="{Binding SortEmailsCommand}"
+            Margin="20 20 20 20"
+            Content="Email"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="16"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="4" Grid.Row="4"
+            Command="{Binding SortDateCommand}"
+            Margin="20 20 20 20"
+            Content="Date"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="16"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="5" Grid.Row="4"
+            Command="{Binding SortIsAdultCommand}"
+            Margin="20 20 20 20"
+            Content="IsAdult"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="16"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="6" Grid.Row="4"
+            Command="{Binding SortSunSignsCommand}"
+            Margin="20 20 20 20"
+            Content="SunSign"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="16"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="7" Grid.Row="4"
+            Command="{Binding SortChineseCommand}"
+            Margin="20 20 20 20"
+            Content="ChineseSign"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="12"
+            FontWeight="Bold">
+        </Button>
+
+        <Button
+            Grid.Column="8" Grid.Row="4"
+            Command="{Binding SortBirthdaysCommand}"
+            Margin="20 20 20 20"
+            Content="Birthday"
+            Foreground="DarkBlue"
+            Background="CornflowerBlue"
+            FontSize="16"
+            FontWeight="Bold">
+        </Button>
     </Grid>
 </UserControl>
