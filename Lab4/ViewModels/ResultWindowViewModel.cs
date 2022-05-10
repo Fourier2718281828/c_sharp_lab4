@@ -85,7 +85,7 @@ namespace Lab2.ViewModels
 
         public RelayCommand<object> ToAddPersonCommand
         {
-            get => _toAddPersonCommand ??= new RelayCommand<object>(_ => _addNavigation.Invoke());
+            get => _toAddPersonCommand ??= new RelayCommand<object>(_ => add());
         }
 
         public RelayCommand<object> ToEditPersonCommand
@@ -97,13 +97,25 @@ namespace Lab2.ViewModels
         #endregion
 
         #region Methods
+        private void add()
+        {
+            ChosenPerson = new();
+            _addNavigation.Invoke();
+        }
         private void edit()
         {
-            _editNavigation.Invoke();
+            if (!isFullyAPerson(ChosenPerson))
+            {
+                MessageBox.Show("You haven't chosen a person to edit.");
+            }
+            else
+            {
+                _editNavigation.Invoke();
+            }
         }
         private async void erase()
         {
-            if (ChosenPerson == null)
+            if (!isFullyAPerson(ChosenPerson))
             {
                 MessageBox.Show("You haven't chosen a person to erase.");
             }
@@ -111,7 +123,14 @@ namespace Lab2.ViewModels
             {
                 await _repo.Erase(ChosenPerson);
                 _collectionOfPeople.Remove(find(ChosenPerson));
+                ChosenPerson = new();
             }
+        }
+
+        private bool isFullyAPerson(Person p)
+        {
+            if (p == null) return false;
+            return p.Name != null && p.Surname != null && p.DateOfBirth != null && p.Email != null;
         }
 
         private Person find(Person p)
@@ -125,7 +144,11 @@ namespace Lab2.ViewModels
             return p;
         }
 
-        
+        private void SortByEmails()
+        {
+            _collectionOfPeople = new ObservableCollection<Person>(_collectionOfPeople.OrderBy(person => person.Email).ToList());
+            OnPropertyChanged(nameof(CollectionOfPeople));
+        }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

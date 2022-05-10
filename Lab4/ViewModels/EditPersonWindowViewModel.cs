@@ -81,35 +81,6 @@ namespace Lab2.ViewModels
                 _newPerson.DateOfBirth = value;
             }
         }
-        //public string Name
-        //{
-        //    get => _chosenPerson.Name;
-        //    set => _chosenPerson.Name = value;
-        //}
-
-        //public string Surname
-        //{
-        //    get => _chosenPerson.Surname;
-        //    set => _chosenPerson.Surname = value;
-        //}
-
-        //public string Email
-        //{
-        //    get => _chosenPerson.Email;
-        //    set => _chosenPerson.Email = value;
-        //}
-
-        //public DateTime? DateOfBirth
-        //{
-        //    get
-        //    {
-        //        return _chosenPerson.DateOfBirth;
-        //    }
-        //    set
-        //    {
-        //        _chosenPerson.DateOfBirth = value;
-        //    }
-        //}
 
         public RelayCommand<object> EditCommand
         {
@@ -127,8 +98,7 @@ namespace Lab2.ViewModels
         #region Methods
         private void back()
         {
-            Name = Surname = Email = null;
-            DateOfBirth = null;
+            _chosenPerson = new();
             _exitNavigation.Invoke();
         }
 

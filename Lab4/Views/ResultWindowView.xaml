@@ -73,48 +73,56 @@
                     Header="Name"
                     Width="*"
                     Binding="{Binding Name}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Surname"
                     Width="*"
                     Binding="{Binding Surname}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Email"
                     Width="2*"
                     Binding="{Binding Email}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Date of Birth"
                     Width="0.7*"
                     Binding="{Binding DateOfBirthString}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="IsAdult"
                     Width="0.5*"
                     Binding="{Binding IsAdult}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Sun Sign"
                     Width="0.5*"
                     Binding="{Binding SunSign}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Chinese Sign"
                     Width="0.7*"
                     Binding="{Binding ChineseSign}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Has Birthday"
                     Width="0.7*"
                     Binding="{Binding IsBirthday}"
+                    CanUserResize="False"
                     >
                 </DataGridTextColumn>
             </DataGrid.Columns>
