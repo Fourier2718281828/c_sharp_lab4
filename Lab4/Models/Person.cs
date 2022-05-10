@@ -113,9 +113,28 @@ namespace Lab2.Models
 
         #region Methods
 
-        public bool equals(Person p)
+        public override bool Equals(object? obj)
         {
-            return Name == p.Name && Surname == p.Surname && Email == p.Email && DateOfBirth == p.DateOfBirth;
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (!(obj is Person))
+            {
+                return false;
+            }
+
+            Person p = (Person) obj;
+
+            return Email == p.Email;
+        }
+
+        public override int GetHashCode()
+        {
+            if (Name == null || Surname == null || Email == null || DateOfBirth == null)
+                return 0;
+            return Name.GetHashCode() ^ Surname.GetHashCode() ^ Email.GetHashCode() ^ DateOfBirth.GetHashCode();
         }
         public void computeIsAdult()
         {

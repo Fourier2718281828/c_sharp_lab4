@@ -186,7 +186,7 @@ namespace Lab2.ViewModels
             else
             {
                 await _repo.Erase(ChosenPerson);
-                _collectionOfPeople.Remove(find(ChosenPerson));
+                _collectionOfPeople.Remove(ChosenPerson);
                 ChosenPerson = new();
             }
         }
@@ -195,17 +195,6 @@ namespace Lab2.ViewModels
         {
             if (p == null) return false;
             return p.Name != null && p.Surname != null && p.DateOfBirth != null && p.Email != null;
-        }
-
-        private Person find(Person p)
-        {
-            for (int i = 0; i < _collectionOfPeople.Count; ++i)
-            {
-                if (_collectionOfPeople[i].equals(p))
-                    return _collectionOfPeople[i];
-            }
-
-            return p;
         }
 
         private void sortByNames()

@@ -38,9 +38,6 @@ namespace Lab2.ViewModels
             _exitNavigation = exitNavigation;
             _chosenPerson = chosenPerson;
 
-            /*_collectionOfPeople.Remove(_chosenPerson);*/
-
-            
             return;
         }
         #endregion
@@ -131,14 +128,21 @@ namespace Lab2.ViewModels
 
                 person.checkTheAge();
 
-                Task task6 = Task.Run(() => _repo.AddOrUpdateAsync(person));
-                await task6;
-
-                await eraseChosen();
-                _collectionOfPeople.Add(person);
+                if (_collectionOfPeople.Contains(person))
+                {
+                    MessageBox.Show("The person with this email already exists");
+                    return;
+                }
+                else if(_collectionOfPeople.Contains(_chosenPerson))
+                {
+                    _collectionOfPeople.Remove(_chosenPerson);
+                    await _repo.Erase(_chosenPerson);
+                    Task task6 = Task.Run(() => _repo.AddOrUpdateAsync(person));
+                    await task6;
+                    _collectionOfPeople.Add(person);
+                }
 
                 _newPerson = new();
-
                 _exitNavigation.Invoke();
             }
             catch (BadEmailException ex)
@@ -153,27 +157,6 @@ namespace Lab2.ViewModels
             {
                 MessageBox.Show(ex.Message);
             }
-
-        }
-
-
-        private async Task eraseChosen()
-        {
-            Task<Person?> task = Task.Run(() => find(_chosenPerson));
-            await task;
-            if (task.Result == null) return;
-            _collectionOfPeople.Remove((Person) task.Result);
-        }
-
-        private Person? find(Person p)
-        {
-            for(int i = 0; i < _collectionOfPeople.Count; ++i)
-            {
-                if(_collectionOfPeople[i].equals(p))
-                    return _collectionOfPeople[i]; 
-            }
-
-            return null;
         }
 
         #endregion

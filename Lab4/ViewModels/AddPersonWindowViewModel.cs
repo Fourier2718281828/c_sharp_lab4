@@ -102,10 +102,20 @@ namespace Lab2.ViewModels
 
                 person.checkTheAge();
                
-                Task task6 = Task.Run(() => _repo.AddOrUpdateAsync(person));
-                await task6;
+                
 
-                _collectionOfPeople.Add(person);
+                if(_collectionOfPeople.Contains(person))
+                {
+                    MessageBox.Show("The person with this email already exists");
+                    return;
+                }
+                else
+                {
+                    Task task6 = Task.Run(() => _repo.AddOrUpdateAsync(person));
+                    await task6;
+                    _collectionOfPeople.Add(person);
+                }
+                
 
                 Name = Surname = Email = null;
                 DateOfBirth = null;
