@@ -117,7 +117,7 @@ namespace Lab4.Repositories
             await t;
         }
 
-        public async void addPeople(Person[] people)
+        public void addPeople(Person[] people)
         {
             for (int i = 0; i < people.Length; ++i)
             {
@@ -134,7 +134,7 @@ namespace Lab4.Repositories
 
                 person.checkTheAge();
 
-                await AddOrUpdateAsync(person);
+                AddOrUpdateAsync(person);
                     
             }
         }

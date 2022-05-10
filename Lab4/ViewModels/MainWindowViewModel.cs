@@ -57,7 +57,7 @@ namespace Lab2.ViewModels
             }
         }
 
-        private static readonly Person[] people =
+        private readonly Person[] people =
         {
             new Person("Oleg",      "Olegovych",        "ol1@ol.ol"   ,new DateTime(1995, 1, 1)),
             new Person("Ruslan",    "Ruslanovych",      "ru1@ru.ru"   ,new DateTime(1967, 2, 1)),

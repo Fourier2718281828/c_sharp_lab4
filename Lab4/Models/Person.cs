@@ -136,6 +136,7 @@ namespace Lab2.Models
                 return 0;
             return Name.GetHashCode() ^ Surname.GetHashCode() ^ Email.GetHashCode() ^ DateOfBirth.GetHashCode();
         }
+
         public void computeIsAdult()
         {
             _isAdult = _age >= ADULT_AGE;
@@ -158,6 +159,11 @@ namespace Lab2.Models
         }
 
         public void computeSunSign() => _sunSign = getWesternZodiacSign();     
+
+        public bool otherFieldsEqual(Person p)
+        {
+            return Name == p.Name && Surname == p.Surname && DateOfBirth == p.DateOfBirth;
+        }
 
         public void computeChineseZodiacSign()
         {

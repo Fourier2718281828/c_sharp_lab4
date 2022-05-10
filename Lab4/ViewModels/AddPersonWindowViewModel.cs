@@ -102,8 +102,6 @@ namespace Lab2.ViewModels
 
                 person.checkTheAge();
                
-                
-
                 if(_collectionOfPeople.Contains(person))
                 {
                     MessageBox.Show("The person with this email already exists");
@@ -114,13 +112,15 @@ namespace Lab2.ViewModels
                     Task task6 = Task.Run(() => _repo.AddOrUpdateAsync(person));
                     await task6;
                     _collectionOfPeople.Add(person);
+
+                    Name = Surname = Email = null;
+                    DateOfBirth = null;
+
+                    _exitNavigation.Invoke();
                 }
                 
 
-                Name = Surname = Email = null;
-                DateOfBirth = null;
-
-                _exitNavigation.Invoke();
+                
             }
             catch (BadEmailException ex)
             {

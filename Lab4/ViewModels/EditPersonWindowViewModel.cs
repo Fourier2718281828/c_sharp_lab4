@@ -133,7 +133,7 @@ namespace Lab2.ViewModels
                     MessageBox.Show("The person with this email already exists");
                     return;
                 }
-                else if(_collectionOfPeople.Contains(_chosenPerson))
+                else if (_collectionOfPeople.Contains(_chosenPerson))
                 {
                     _collectionOfPeople.Remove(_chosenPerson);
                     await _repo.Erase(_chosenPerson);
